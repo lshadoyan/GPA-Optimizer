@@ -1,18 +1,21 @@
-import os
-import sys
-
 import pandas as pd
 import tabula
 
-file_path = r"C:\Users\Lucas\Desktop\PDF-Extract\Pathways Course Guide by Alpha.pdf"
+file_path = r"Pathways Course Guide by Alpha.pdf"
 
-#pages = tabula.read_pdf(file_path, stream=True, pages="all")
-#page_num = len(pages)
+dfs = tabula.read_pdf(file_path, pages="all", lattice=True, multiple_tables=True, pandas_options={'header': None})
 
-#df = tabula.read_pdf(file_path, pages="all", lattice=True, multiple_tables=True)
-#for page in range(page_num):
-#    tables[page].to_excel('test.xlsx', index=False)
-#table = table.concat(tables) 
-#df[0].to_excel('test.xlsx', index=False)
-df = tabula.convert_into(file_path, "test.csv", output_format='csv', lattice=True, pages="all")
+data = []
+pathway = '2'
+for df in dfs:
+    df["Course"] = df[0].astype(str) +" "+ df[1].astype(str)
+    n_df = df.loc[df[3].str.contains(pathway, na=False)]
+    data.append(n_df["Course"])
+
+data = pd.concat(data)
+print(data)
+data.to_csv('output.csv', index=False, header=False)
+with open('output.csv', 'r') as f_in, open('my_file.txt', 'w') as f_out:
+    content = f_in.read().strip().replace("\n", ",")
+    f_out.write(content)
 
