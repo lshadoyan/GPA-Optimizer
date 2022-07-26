@@ -4,9 +4,14 @@ import tabula
 file_path = r"Pathways Course Guide by Alpha.pdf"
 
 dfs = tabula.read_pdf(file_path, pages="all", lattice=True, multiple_tables=True, pandas_options={'header': None})
-
 data = []
-pathway = '2'
+
+p = open('pathways.txt', 'r')
+pathway = p.read()
+print(pathway)
+p.close()
+
+pathway = input("Pathway Concept: ")
 for df in dfs:
     df["Course"] = df[0].astype(str) +" "+ df[1].astype(str)
     n_df = df.loc[df[3].str.contains(pathway, na=False)]
