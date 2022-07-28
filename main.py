@@ -1,26 +1,28 @@
-import pandas as pd
-import tabula
+import course_finder as cf 
+import data_frame as df  
 
-file_path = r"Pathways Course Guide by Alpha.pdf"
+def main():
+    pathway = df.pathway_msg()
+    args = cf.cli()
+    if args.p is not None: 
+        path = str(args.p)
+    else:
+        print(pathway)
+        path = input("Pathway Concept: ")
+    df.csv_create(path)
+    df.fix()
+    if args.uni is not None:  
+        university = args.uni 
+    else: 
+        university = input("University ID in Anaanu: ")
+    if args.f is not None: 
+        file = args.f 
+    else: 
+        file = input("File location: ")
+    courses, gpas = cf.course_finder(university, file)
+    cf.write(courses, gpas)
+    cf.sort()
+    print("Data sorted in result.csv file") 
 
-dfs = tabula.read_pdf(file_path, pages="all", lattice=True, multiple_tables=True, pandas_options={'header': None})
-data = []
-
-p = open('pathways.txt', 'r')
-pathway = p.read()
-print(pathway)
-p.close()
-
-pathway = input("Pathway Concept: ")
-for df in dfs:
-    df["Course"] = df[0].astype(str) +" "+ df[1].astype(str)
-    n_df = df.loc[df[3].str.contains(pathway, na=False)]
-    data.append(n_df["Course"])
-
-data = pd.concat(data)
-print(data)
-data.to_csv('output.csv', index=False, header=False)
-with open('output.csv', 'r') as f_in, open('my_file.txt', 'w') as f_out:
-    content = f_in.read().strip().replace("\n", ",")
-    f_out.write(content)
-
+if __name__ == "__main__": 
+    main() 
