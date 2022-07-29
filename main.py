@@ -10,15 +10,7 @@ def main():
         print(pathway)
         path = input("Pathway Concept: ")
     path_courses = df.csv_create(path)
-    if args.uni is not None:  
-        university = args.uni 
-    else: 
-        university = input("University ID in Anaanu: ")
-    if args.f is not None: 
-        file = args.f 
-    else: 
-        file = input("File location: ")
-    course_name, gpas = cf.course_finder(university, file, path_courses)
+    course_name, gpas = cf.course_finder(path_courses)
     cf.write(course_name, gpas)
     cf.sort()
     print("Data sorted in output.csv file") 
