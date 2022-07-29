@@ -1,6 +1,6 @@
 import pandas as pd
 import tabula
-import course_finder as cf
+import numpy as np
 
 def pathway_msg(): 
     p = open('pathways.txt', 'r')
@@ -22,13 +22,8 @@ def csv_create(pathway):
         data.append(n_df["Course"])
 
     data = pd.concat(data)
-    # print(data)
     data.to_csv('output.csv', index=False, header=False)
-
-def fix(): 
-    with open('output.csv', 'r') as f_in, open('my_file.txt', 'w') as f_out:
-        content = f_in.read().strip().replace("\n", ",")
-        f_out.write(content)
+    return data
 
 if __name__ == "__main__": 
     ... 

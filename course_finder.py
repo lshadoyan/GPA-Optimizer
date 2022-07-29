@@ -1,4 +1,4 @@
-import textwrap
+from importlib.resources import path
 import requests
 import os 
 import sys 
@@ -25,25 +25,22 @@ def get_gpa(university, subject, course_number):
     return gpa
 
 def sort():
-    df = pd.read_csv('result.csv', header=None)
+    df = pd.read_csv('output.csv', header=None)
     # print(df.head())
     df = df.sort_values(by=1, ascending=False)
-    df.to_csv('result.csv')
+    df.to_csv('output.csv')
     
-def write(course_names, grades ):
-    with open('result.csv','w') as f:
+def write(course_name, grades):
+    with open('output.csv','w') as f:
         writer = csv.writer(f)
-        writer.writerows(zip(course_names, grades))
+        writer.writerows(zip(course_name, grades))
         f.close()
 
-def course_finder(university, course_file): 
-    if(os.path.exists(course_file)):
-        with open(course_file, 'r') as file:
-            courses = file.read().split(',')
-            file.close() 
-    else:
+def course_finder(university, course_file, pathway_courses): 
+    if(not (os.path.exists(course_file))):
         print("File doesn't exist")
         sys.exit()
+    courses = pathway_courses.tolist()
     gpas = []  
     for elem in list(courses):
         subject, number = elem.split(' ')

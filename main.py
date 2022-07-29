@@ -9,8 +9,7 @@ def main():
     else:
         print(pathway)
         path = input("Pathway Concept: ")
-    df.csv_create(path)
-    df.fix()
+    path_courses = df.csv_create(path)
     if args.uni is not None:  
         university = args.uni 
     else: 
@@ -19,10 +18,10 @@ def main():
         file = args.f 
     else: 
         file = input("File location: ")
-    courses, gpas = cf.course_finder(university, file)
-    cf.write(courses, gpas)
+    course_name, gpas = cf.course_finder(university, file, path_courses)
+    cf.write(course_name, gpas)
     cf.sort()
-    print("Data sorted in result.csv file") 
+    print("Data sorted in output.csv file") 
 
 if __name__ == "__main__": 
     main() 
