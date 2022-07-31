@@ -1,15 +1,15 @@
 import course_finder as cf 
-import data_frame as df  
+import pathway as p  
 
 def main():
-    pathway = df.pathway_msg()
+    pathway = p.pathway_msg()
     args = cf.cli()
     if args.p is not None: 
         path = str(args.p)
     else:
         print(pathway)
         path = input("Pathway Concept: ")
-    path_courses = df.csv_create(path)
+    path_courses = p.csv_create(path)
     course_name, gpas = cf.course_finder(path_courses)
     cf.write(course_name, gpas)
     cf.sort()
