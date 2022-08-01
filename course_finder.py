@@ -6,18 +6,18 @@ import csv
 def cli(): 
     parser = argparse.ArgumentParser(description="Pathways: 1f, 1a, 2, 3, 4, 5, 6a, 6d, and 7")
     #parser.add_argument('-uni', help='University id used in Anaanu')
-    #parser.add_argument('-f', help='Path to file with courses' )
+    parser.add_argument('-f', help='Path to file with course list')
     parser.add_argument('-p', help='Pathways concept chosen', type=str)
     args = parser.parse_args()
     return args
 
-def get_gpa(university, subject, course_number):
-    req = requests.get("https://anaanu.com/api/v1/course?university="+university+"&subject="+subject+"&course="+course_number)
+def get_gpa(subject, course_number):
+    req = requests.get("https://anaanu.com/api/v1/course?university=virginia-tech-vt"+"&subject="+subject+"&course="+course_number)
     r_json = req.json()
-    try:
+    try: 
         gpa = r_json['course']['average']['gpa']
-    except:
-        gpa = None
+    except: 
+        gpa = "null"
     return gpa
 
 def sort():
@@ -37,13 +37,14 @@ def course_finder(pathway_courses):
     gpas = []  
     for elem in list(courses):
         subject, number = elem.split(' ')
-        gpa = get_gpa("virginia-tech-vt", subject, number)
-        if(gpa == None):
+        gpa = get_gpa(subject, number)
+        if(gpa == "null"):
             courses.remove(elem)
             continue
         print("Subject: "+subject+" Course Number: "+ number + " GPA: " +str(gpa))
         gpas.append(gpa)
-    return courses, gpas  
+    return courses, gpas 
+    #df = df.dropna() use it to drop entire row with null values 
 
 if __name__ == "__main__": 
     ...  
