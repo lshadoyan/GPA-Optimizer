@@ -8,7 +8,7 @@ def course_check(course_file):
     if not os.path.exists(course_file):
         print("File doesn't exist")
         sys.exit()
-        
+
     replacement = "" 
     with open(course_file, 'r') as f:
         file = f.readlines()
@@ -23,10 +23,7 @@ def course_check(course_file):
         f.write(replacement)
     
 def course_list(course_file):
-    try: 
-        df = pd.read_csv(course_file, delimiter=" ", header=None, names =["course_name", "course_number", "professor"])
-    except: 
-        df = pd.read_csv(course_file, delimiter=" ", header=None, names =["course_name", "course_number"]) 
+    df = pd.read_csv(course_file, delimiter=" ", header=None, names =["course_name", "course_number", "professor"])
     return df
 
 def avg_gpa(df, row1, row2):
@@ -56,11 +53,14 @@ def course_info(subject, course_number):
 def spec_info(course_list):
     df = pd.DataFrame()
     for index, row in course_list.iterrows():
-        info = course_info(str(row['course_name']), str(row['course_number']))
+        try: 
+            info = course_info(str(row['course_name']), str(row['course_number']))
+        except: 
+            return None
         professor = row["professor"]
-        print(professor)
+        # print(professor)
         info = info.loc[info['instructor.lastName'] == professor]
-        print(info)
+        # print(info)
         df = pd.concat([df, info], axis=0, ignore_index=True)
     # print(df)
     return df

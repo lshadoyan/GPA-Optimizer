@@ -8,17 +8,15 @@ def main():
     if(args.f is not None):
         ag.course_check(args.f)   
         file_data = ag.course_list(args.f)
-
         if "professor" in file_data.columns:
             prof_info = ag.spec_info(file_data)
-
-            if len(file_data.index) == len(prof_info.index): 
+            
+            if (prof_info is not None) and (len(file_data.index) == len(prof_info.index)): 
                 prof_avg = ag.prof_gpa(prof_info, file_data )
                 print("\nProjected GPA Based on Professor: " + str(prof_avg))
             else: 
                 avg = ag.avg_gpa(file_data, "course_name", "course_number")
                 print("Projected GPA: " + str(avg))
-
         else:   
             avg = ag.avg_gpa(file_data, "course_name", "course_number")
             print("Projected GPA: " + str(avg))
