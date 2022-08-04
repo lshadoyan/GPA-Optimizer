@@ -1,0 +1,5 @@
+CEE 5584 Martin
+STAT 3704 Joner
+STAT 3094 Smith
+STAT 3504 Chen
+UH 2824

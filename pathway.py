@@ -1,7 +1,5 @@
 import pandas as pd
-import tabula
-import os 
-import sys 
+import tabula 
   
 def csv_create(pathway, arg):
     file_path = r"Pathways Course Guide by Alpha.pdf"
@@ -10,8 +8,7 @@ def csv_create(pathway, arg):
     data = []
     for df in dfs:
         df["Course"] = df[0].astype(str) +" "+ df[1].astype(str)
-        if arg is not None:  
-            n_df = df.loc[df[3].str.contains(pathway, na=False)]
+        n_df = df.loc[df[3].str.contains(pathway, na=False)]
         data.append(n_df["Course"])
 
     data = pd.concat(data)
