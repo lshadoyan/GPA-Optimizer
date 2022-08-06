@@ -9,21 +9,15 @@ def course_check(course_file):
         print("File doesn't exist")
         sys.exit()
 
-    replacement = "" 
-    with open(course_file, 'r') as f:
-        file = f.readlines()
-        if len(file) == 0: 
-            print("Put courses into the file")
-            sys.exit()  
-        for line in file: 
-            n_line = line.strip()  
-            replacement = replacement + n_line + "\n"
-
-    with open(course_file, 'w') as f: 
-        f.write(replacement)
+def space_replace(course_file): 
+    with open(course_file, 'r+') as f:
+        txt = f.read().replace(' ', '')
+        f.seek(0)
+        f.write(txt)
+        f.truncate()
     
 def course_list(course_file):
-    df = pd.read_csv(course_file, delimiter=" ", header=None, names =["course_name", "course_number", "professor"])
+    df = pd.read_csv(course_file, delimiter=",", header=None, names =["course_name", "course_number", "professor"])
     return df
 
 def avg_gpa(df, row1, row2):

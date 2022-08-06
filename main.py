@@ -6,7 +6,8 @@ def main():
     args = cf.cli()
 
     if(args.f is not None):
-        ag.course_check(args.f)   
+        ag.course_check(args.f)
+        ag.space_replace(args.f)   
         file_data = ag.course_list(args.f)
         if "professor" in file_data.columns:
             prof_info = ag.spec_info(file_data)
