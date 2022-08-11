@@ -12,8 +12,8 @@ This program has two main functions:
 1. Install `python` and `git`
 
 2. Clone the Repository: 
-	````shell
-	$ git clone https://github.com/lshadoyan/VT-Course-Finder.git
+	````
+	git clone https://github.com/lshadoyan/VT-Course-Finder.git
 	````   
 3. Navigate to the repository from command line and all of the required Python libraries can be installed using: 
 	  ````
