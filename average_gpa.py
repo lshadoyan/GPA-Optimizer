@@ -52,11 +52,8 @@ def spec_info(course_list):
         except: 
             return None
         professor = row["professor"]
-        # print(professor)
         info = info.loc[info['instructor.lastName'] == professor]
-        # print(info)
         df = pd.concat([df, info], axis=0, ignore_index=True)
-    # print(df)
     return df
 
 def prof_gpa(df, course_list): 

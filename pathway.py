@@ -13,6 +13,3 @@ def csv_create(pathway, arg):
 
     data = pd.concat(data)
     return data
-
-if __name__ == "__main__": 
-    ... 
