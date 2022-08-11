@@ -1,4 +1,4 @@
-# GPA Optimizer 
+# VT GPA Optimizer 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
 A simple CLI to help the average college student optimize their course-load and GPA. 
