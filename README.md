@@ -61,5 +61,5 @@ Potentially finding a more updated website to request information from instead o
  
 Improving average GPA finder functionality: 
 
--- In the case of request failure still giving the user a GPA based on the requests that didn't fail, even if that GPA would be inaccurate.
--- Finding a better source of course information to parse through. Finding a source that contains both the course and course credit would allow my program to get the weighted GPA of provided courses. 
+- In the case of request failure still giving the user a GPA based on the requests that didn't fail, even if that GPA would be inaccurate.
+- Finding a better source of course information to parse through. Finding a source that contains both the course and course credit would allow my program to get the weighted GPA of provided courses. 
